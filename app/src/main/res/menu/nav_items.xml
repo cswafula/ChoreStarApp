@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_friends"
+        android:icon="@drawable/childfriends"
+        android:title="Add Friends"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/choresx2"
+        android:title="Logout" />
+    <item
+        android:id="@+id/nav_switch"
+        android:icon="@drawable/alertsx2"
+        android:title="Switch to ChildApp" />
+
+</menu>

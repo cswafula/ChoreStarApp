@@ -2,9 +2,11 @@ package com.example.charlie.chorestarapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,19 +24,13 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.paperdb.Paper;
+
 public class createacc extends AppCompatActivity {
     private Button cancel,btncontinue;
     private EditText Email, NickName, Pass,confirm;
     private ProgressBar progressBar;
 
-//    public static final String REGISTER_URL="http://www.racecoursehospital.com/charlie/register.php";
-//    public static final String KEY_EMAIL="emailaddress";
-//    public static final String KEY_PASS="password";
-
-    public static final String REGISTER_URL="http://192.168.0.33:8000/api/api_register";
-    public static final String KEY_EMAIL="emailaddress";
-    public static final String KEY_NICKNAME="nickname";
-    public static final String KEY_PASS="password";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,51 +40,48 @@ public class createacc extends AppCompatActivity {
         NickName= (EditText) findViewById(R.id.Register_Nickname);
         Pass= (EditText) findViewById(R.id.Register_Pass);
         confirm= (EditText) findViewById(R.id.Register_Pass_confirm);
-        cancel = (Button) findViewById(R.id.createacc_button_cancel);
         btncontinue= (Button) findViewById(R.id.createacc_button_continue);
         progressBar=(ProgressBar) findViewById(R.id.progress_createacc);
+
+        Paper.init(this);
 
         btncontinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
+                validate();
             }
         });
     }
 
-    private void registerUser() {
+    private void validate() {
+        String EmailAddress=Email.getText().toString().trim();
+        String Password= Pass.getText().toString().trim();
+        String nick_name= NickName.getText().toString().trim();
+        String ConfirmPass= confirm.getText().toString().trim();
 
-    final String email,password,nickename;
-    email=Email.getText().toString().trim();
-    password=Pass.getText().toString().trim();
-    nickename=NickName.getText().toString().trim();
-
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, REGISTER_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "Inserted Successfully", Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-                    }
-                }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params=new HashMap<>();
-                params.put(KEY_EMAIL,email);
-                params.put(KEY_NICKNAME,nickename);
-                params.put(KEY_PASS,password);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
+        if(EmailAddress.isEmpty()){
+            Email.setError("Email address is Required");
+        }else if(nick_name.isEmpty()){
+            NickName.setError("This Field is Required");
+        }
+        else if(Password.isEmpty()){
+            Pass.setError("Please Enter Password");
+        }else if(ConfirmPass.isEmpty()){
+            confirm.setError("Please confirm your password");
+        }else if(!Password.equals( ConfirmPass)){
+            confirm.setError("Passwords don't match");
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(EmailAddress).matches()){
+            Email.setError("Please enter a valid Email address");
+        }else if(Password.length() < 6){
+            Pass.setError("Password shouldn't be less than 6 words");
+        }else{
+            progressBar.setVisibility(View.VISIBLE);
+            Paper.book().write("Email",EmailAddress);
+            Paper.book().write("Password",Password);
+            Paper.book().write("Nickname",nick_name);
+            progressBar.setVisibility(View.GONE);
+            startActivity(new Intent(createacc.this, CreateChildAcc.class));
+        }
     }
 
     @Override
@@ -113,38 +106,3 @@ public class createacc extends AppCompatActivity {
         alertDialog.show();
     }
 }
-
-
-//    private void registerUser() {
-//
-//        final String email,password;
-//        email=Email.getText().toString().trim();
-//        password=Pass.getText().toString().trim();
-//
-//        StringRequest stringRequest=new StringRequest(Request.Method.POST, REGISTER_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
-//                    }
-//                }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String,String> params=new HashMap<>();
-//                params.put(KEY_EMAIL,email);
-//                params.put(KEY_PASS,password);
-//                return params;
-//            }
-//        };
-//
-//        RequestQueue requestQueue= Volley.newRequestQueue(this);
-//        requestQueue.add(stringRequest);
-//
-//    }
-

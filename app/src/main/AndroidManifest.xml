@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.charlie.chorestarapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".createacc"></activity>
+        <activity android:name=".createacc" />
+        <activity android:name=".CreateChildAcc" />
+        <activity android:name=".ParentHomepage"
+            android:theme="@style/AppTheme2"></activity>
     </application>
 
 </manifest>
