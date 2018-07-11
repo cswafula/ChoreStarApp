@@ -21,4 +21,13 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="enter_email_address">Enter Email address</string>
+    <string name="create_profile">Create Profile</string>
+    <string name="what_s_your_child_s_age">What\'s your child\'s Age?</string>
+    <string name="what_s_your_child_s_name">What\'s your child\'s name?</string>
+    <string name="add_new_child_profile">Add New Child Profile</string>
+    <string name="add_new_chore">Add New Chore</string>
+    <string name="enter_chore_name">Enter Chore Name</string>
+    <string name="enter_chore_points">Enter Chore Points</string>
+    <string name="add_chore">Add Chore</string>
 </resources>

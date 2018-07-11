@@ -1,5 +1,6 @@
 package com.example.charlie.chorestarapp;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -27,9 +28,15 @@ import java.util.Map;
 import io.paperdb.Paper;
 
 public class createacc extends AppCompatActivity {
+
+    public static final String REGISTER_URL="https://chorestar95049.herokuapp.com/api/Register";
+    public static final String KEY_EMAIL="Email";
+    public static final String KEY_NICKNAME="Nickname";
+    public static final String KEY_PASS="Password";
+
+
     private Button cancel,btncontinue;
     private EditText Email, NickName, Pass,confirm;
-    private ProgressBar progressBar;
 
 
     @Override
@@ -41,7 +48,6 @@ public class createacc extends AppCompatActivity {
         Pass= (EditText) findViewById(R.id.Register_Pass);
         confirm= (EditText) findViewById(R.id.Register_Pass_confirm);
         btncontinue= (Button) findViewById(R.id.createacc_button_continue);
-        progressBar=(ProgressBar) findViewById(R.id.progress_createacc);
 
         Paper.init(this);
 
@@ -75,13 +81,55 @@ public class createacc extends AppCompatActivity {
         }else if(Password.length() < 6){
             Pass.setError("Password shouldn't be less than 6 words");
         }else{
-            progressBar.setVisibility(View.VISIBLE);
             Paper.book().write("Email",EmailAddress);
             Paper.book().write("Password",Password);
             Paper.book().write("Nickname",nick_name);
-            progressBar.setVisibility(View.GONE);
-            startActivity(new Intent(createacc.this, CreateChildAcc.class));
+            CreateParentAccount();
         }
+    }
+
+    private void CreateParentAccount() {
+
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Creating Parent's Account....");
+        progressDialog.show();
+
+        final String email,password,nickename;
+        email= Paper.book().read("Email");
+        password=Paper.book().read("Password");
+        nickename=Paper.book().read("Nickname");
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, REGISTER_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Inserted Successfully", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(createacc.this, CreateChildAcc.class));
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getApplicationContext(),error.toString(),Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put(KEY_EMAIL,email);
+                params.put(KEY_PASS,password);
+                params.put(KEY_NICKNAME,nickename);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
     }
 
     @Override

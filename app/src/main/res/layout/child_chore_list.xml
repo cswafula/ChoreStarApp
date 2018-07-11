@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/white">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/ChoresDetailsConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:weightSum="3"
+                android:id="@+id/LayoutNameHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_weight="2"
+                    android:id="@+id/ChoreChildName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/button"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Charlie Boy"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/ChorePoints"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="10"
+                    android:textColor="@android:color/white"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="254dp"
+                android:layout_height="130dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutNameHolder">
+
+                <ImageView
+                    android:id="@+id/ChoreImage"
+                    android:layout_width="254dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/chore1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/ChoreName"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@color/button"
+                android:fontFamily="@font/nunito_extralight"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Wash the Dishes"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,97 +8,113 @@
     tools:context=".CreateChildAcc"
     android:background="@drawable/childcreate"
     android:orientation="vertical">
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/txt_Email"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Email"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/nunito_extralight" />
+
     <TextView
         android:id="@+id/txt_NickName"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Hello!"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="20dp"
-        app:fontFamily="@font/nunito_extralight" />
+        app:fontFamily="@font/nunito_extralight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Create Child's Profile"
         android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        app:fontFamily="@font/nunito_extralight" />
+        app:fontFamily="@font/nunito_extralight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_NickName" />
 
-    <ImageView
-        android:id="@+id/image_getter"
-        android:layout_width="144dp"
-        android:layout_height="142dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/childupload" />
-
-    <Button
-        android:id="@+id/childaccount_uploader_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="@color/button"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Choose child's image"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        app:fontFamily="@font/nunito_extralight" />
+    <Spinner
+        android:id="@+id/AvatarSpinner"
+        android:layout_width="122dp"
+        android:layout_height="122dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginLeft="8dp" />
 
     <EditText
         android:id="@+id/childname_createacc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:gravity="center"
         android:hint="What's your child's name?"
         android:padding="20dp"
         app:fontFamily="@font/nunito_extralight"
-        android:layout_alignParentLeft="true" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AvatarSpinner" />
+
+    <EditText
+        android:id="@+id/childAge_createacc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:gravity="center"
+        android:hint="What's your child's Age?"
+        android:inputType="number"
+        android:padding="20dp"
+        app:fontFamily="@font/nunito_extralight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childname_createacc" />
 
     <Button
         android:id="@+id/childaccount_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
         android:background="@color/button"
         android:gravity="center"
         android:padding="10dp"
@@ -105,17 +122,25 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="20dp"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
-        app:fontFamily="@font/nunito_extralight" />
+        app:fontFamily="@font/nunito_extralight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childAge_createacc" />
 
     <ProgressBar
+        android:id="@+id/createchildaccProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        android:id="@+id/createchildaccProgress"/>
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childaccount_finish"
+        android:visibility="gone" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
