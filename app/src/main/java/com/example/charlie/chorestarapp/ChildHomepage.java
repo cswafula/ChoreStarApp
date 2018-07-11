@@ -1,10 +1,13 @@
 package com.example.charlie.chorestarapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,6 +30,7 @@ public class ChildHomepage extends AppCompatActivity {
     RecyclerView recyclerView;
     ChoreAdapter adapter;
     List<Chore> choreList;
+    ImageView Refresh;
 
     private static String FETCH_URL;
 
@@ -35,6 +39,15 @@ public class ChildHomepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child_homepage);
         recyclerView=findViewById(R.id.ChildChoresRecycler);
+        Refresh=findViewById(R.id.Refresh);
+
+        Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ChildHomepage.this,ChildHomepage.class));
+            }
+        });
 
         Paper.init(this);
         String Email=Paper.book().read("LoginEmail").toString();
@@ -61,7 +74,7 @@ public class ChildHomepage extends AppCompatActivity {
                             for(int i=0 ; i<jsonArray.length();i++){
                                 JSONObject object=jsonArray.getJSONObject(i);
                                 choreList.add(new Chore(Integer.valueOf(object.getString("ChoreImage")),object.getString("ChoreName")
-                                        ,"For: "+object.getString("ChildName"),object.getString("ChorePoints")));
+                                        ,object.getString("ChildName"),object.getString("ChorePoints")));
                             }
                             adapter= new ChoreAdapter(ChildHomepage.this,choreList);
                             recyclerView.setAdapter(adapter);

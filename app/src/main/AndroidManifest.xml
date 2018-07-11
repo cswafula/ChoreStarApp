@@ -46,7 +46,8 @@
             android:name=".ChildHomepage"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".ChoreDetails"></activity>
+        <activity android:name=".ChoreDetails" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>

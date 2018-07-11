@@ -10,8 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileViewHolder> {
 
@@ -41,6 +51,11 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
         holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Paper.init(mCtx);
+                String Email=Paper.book().read("LoginEmail").toString();
+                final String DELETE_URL="https://chorestar95049.herokuapp.com/api/DeleteProfile/"+Email+"/"+profile.getProfileName();
+
                 AlertDialog.Builder builder= new AlertDialog.Builder(mCtx);
                 builder.setTitle("Delete "+profile.getProfileName());
                 builder.setMessage("This profile will be deleted permanently");
@@ -48,7 +63,21 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
                 builder.setNegativeButton("DELETE!", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        delete();
+                        StringRequest stringRequest=new StringRequest(Request.Method.GET, DELETE_URL,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Toast.makeText(mCtx,"Deleted",Toast.LENGTH_LONG).show();
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+                        RequestQueue requestQueue= Volley.newRequestQueue(mCtx);
+                        requestQueue.add(stringRequest);
+
                     }
                 });
                 AlertDialog alertDialog= builder.create();
@@ -56,10 +85,6 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ProfileV
             }
         });
 
-    }
-
-    private void delete() {
-        String DELETE_URL="https://chorestar95049.herokuapp.com/api/DeleteChore/";
     }
 
     @Override

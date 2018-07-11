@@ -32,8 +32,8 @@ import io.paperdb.Paper;
 public class AlertsFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ProfileAdapter adapter;
-    List<Profile> profileList;
+    AlertsAdapter adapter;
+    List<Alerts> alertsList;
 
     private static String FETCH_URL;
 
@@ -49,7 +49,7 @@ public class AlertsFragment extends Fragment {
 
         FETCH_URL="https://chorestar95049.herokuapp.com/api/FetchAlerts/"+Email;
 
-        profileList=new ArrayList<>();
+        alertsList=new ArrayList<>();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
@@ -68,10 +68,10 @@ public class AlertsFragment extends Fragment {
 
                             for(int i=0 ; i<jsonArray.length();i++){
                                 JSONObject object=jsonArray.getJSONObject(i);
-                                profileList.add(new Profile(Integer.valueOf(object.getString("ChoreImage")),object.getString("ChoreName")
-                                        ,"Value Points: "+object.getString("ChorePoints"),"For: "+object.getString("ChildName")));
+                                alertsList.add(new Alerts(Integer.valueOf(object.getString("ChoreImage")),object.getString("ChoreName")
+                                        ,object.getString("ChildName"),object.getString("ChorePoints")));
                             }
-                            adapter= new ProfileAdapter(getContext(),profileList);
+                            adapter= new AlertsAdapter(getContext(),alertsList);
                             recyclerView.setAdapter(adapter);
 
                         } catch (JSONException e) {

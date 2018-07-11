@@ -85,6 +85,8 @@ public class ParentHomepage extends AppCompatActivity
                 finish();
                 startActivity(new Intent(ParentHomepage.this,ChildSplash.class));
                 break;
+            case R.id.nav_Help:
+                startActivity(new Intent(ParentHomepage.this,Help.class));
         }
         return super.onOptionsItemSelected(item);
     }

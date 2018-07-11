@@ -30,4 +30,5 @@
     <string name="enter_chore_name">Enter Chore Name</string>
     <string name="enter_chore_points">Enter Chore Points</string>
     <string name="add_chore">Add Chore</string>
+    <string name="word_help">Thank You for being part of our ChoreStar Community. We highly value your experience with our application. We hope your registration process has been smooth. On the tab of your dashboard, we have provided you with a list of all your childrens profile. You have the capability of adding new profiles or deleting them. On the second tab as well, you can add chores for your children which will appear on their side. For them to earn their points, you will have to approve the work done on the third tab provided for you. Have a wonderful experience with the application. Feel free to contact us for any inconvinience or complaints about the application.</string>
 </resources>

@@ -9,11 +9,6 @@
         android:title="Add Friends"
         app:showAsAction="always" />
     <item
-        android:id="@+id/nav_ParentProfile"
-        android:title="My Profile"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/nav_switch"
         android:icon="@drawable/alertsx2"
         android:title="Switch to ChildApp"
